@@ -1,0 +1,17 @@
+<div id="sidebar" >
+  <p>Navigation</p>
+  <br />
+  <%= link_to "Articles", articles_path %><br /><br />
+  <%= link_to "Tags", tags_path %><br /><br />
+  <% if logged_in? %>
+    <%= link_to "Authors", authors_path %>
+  <% end %>
+  <br /><br /><br />
+  <p>Most Popular Articles</p>
+  <br />
+  <% popular_articles = Article.most_popular_articles %>
+  <% popular_articles.each do |article| %>
+    <%= link_to "#{article.title}", article_path(article) %><br /><br />
+  <% end %>
+</div>
+  

@@ -5,7 +5,7 @@ module ArticlesHelper
   end
   
   def original_author?
-    current_article = Article.select {|article| article.id == params[:id].to_i}
+    current_article = Article.find(params[:id].to_i)
     current_article[0].author_id == current_user.id
   end
   
