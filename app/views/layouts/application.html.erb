@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Blogger</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <p class="flash"><%= flash.notice %></p>
+  <div id="sidebar" >
+    <p>Navigation</p>
+    <%= link_to "Articles", articles_path %><br />
+    <%= link_to "Tags", tags_path %>
+    <% if logged_in? %>
+      <br /><%= link_to "Authors", authors_path %>
+    <% end %>
+  </div>
   <div id="container">
     <div id="content">
       <%= yield %>

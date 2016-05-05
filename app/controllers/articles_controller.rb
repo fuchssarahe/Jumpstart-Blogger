@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
   before_filter :require_login, except: [:index, :show]
+  # before_filter :deny_access, :unless => :original_author?, except: [:index, :show, :create] 
+  before_filter :deny_unauthorized_access, only: [:edit, :destroy] 
   
   def index
     @articles = Article.all
@@ -19,6 +21,7 @@ class ArticlesController < ApplicationController
   
   def create
     @article = Article.new(article_params)
+    @article.author_id = current_user.id
     @article.save
     
     flash.notice = "Article '#{@article.title}' was sucessfully created!"
